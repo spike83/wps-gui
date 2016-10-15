@@ -195,6 +195,8 @@ wps.process.prototype.execute = function(options) {
             }
           }
         }
+        var context = new Jsonix.Context([XLink_1_0, OWS_1_1_0, WPS_1_0_0, Filter_2_0, OWS_1_0_0, Filter_1_1_0, GML_2_1_2, GML_3_1_1, WFS_1_1_0, SMIL_2_0, SMIL_2_0_Language, WCS_1_1]);
+        me.client.marshaller = context.createMarshaller();
         var body = me.client.marshaller.marshalString(me.info);
         if (hasTiffOutput) {
           new wps.hiddenForm(me.client.unmarshaller, options, me.client.servers[me.server].url,
@@ -294,6 +296,8 @@ wps.process.prototype.output = function(identifier) {
 
 wps.process.prototype.parseDescription = function(description) {
   var server = this.client.servers[this.server];
+  var context = new Jsonix.Context([XLink_1_0, OWS_1_1_0, WPS_1_0_0, Filter_2_0, OWS_1_0_0, Filter_1_1_0, GML_2_1_2, GML_3_1_1, WFS_1_1_0, SMIL_2_0, SMIL_2_0_Language, WCS_1_1]);
+  this.client.unmarshaller = context.createUnmarshaller();
   this.description = this.client.unmarshaller.unmarshalString(
     server.processDescription[this.identifier]).value.processDescription[0];
 };

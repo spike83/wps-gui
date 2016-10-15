@@ -2,3 +2,4 @@ build
 components
 dist
 node_modules
+.idea/
